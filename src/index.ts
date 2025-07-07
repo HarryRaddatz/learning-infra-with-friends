@@ -7,7 +7,7 @@ import { LoggerModule } from './infraesctucture';
 export class Main {
     constructor(
         @inject(HttpService) private httpService: HttpService,
-        @inject(LoggerModule) private loggerModule: LoggerModule,
+        @inject(LoggerModule) private loggerModule: LoggerModuleInterface,
     ) { }
     public async initialize() {
         this.loggerModule.info('System initialized with container');
