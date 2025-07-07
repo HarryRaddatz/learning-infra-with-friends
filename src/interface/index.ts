@@ -1,11 +1,14 @@
 import express, { Application } from 'express';
-import { injectable } from 'inversify';
+import { injectable, inject } from 'inversify';
+import { LoggerModule } from '../infraesctucture';
 
 @injectable()
 export class HttpService {
     private app: Application;
 
-    constructor() {
+    constructor(
+        @inject(LoggerModule) private loggerModule: LoggerModule,
+    ) {
         this.app = express();
     }
 
@@ -17,7 +20,7 @@ export class HttpService {
     async start() {
         this.configure();
         this.app.listen(3000, () => {
-            console.log('Server is running on http://localhost:3000');
+            this.loggerModule.info('Server is running on http://localhost:3000');
         });
     }
 }
